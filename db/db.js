@@ -10,12 +10,16 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     dialect: "postgres",
     dialectOptions: {
-        ssl: true
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
     },
-    port: 5432,
-    native: true
+    port: process.env.DB_PORT,
   }
 );
+
+// const sequelize = new Sequelize(process.env.DB_URI)
 
 
 async function testAuthentication() {
